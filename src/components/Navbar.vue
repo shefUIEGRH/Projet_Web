@@ -17,7 +17,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Voyage Application</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn flat @click="Sign ? In() : Out()">
+      <v-btn text @click="Sign ? In() : Out()" router to="/login">
         <span>{{msg}}</span>
         <v-icon right>mdi-exit-to-app</v-icon>
       </v-btn>
@@ -42,7 +42,7 @@ export default {
       links: [
         {icon: 'mdi-home', text: 'Home', route: '/'},
         {icon: 'mdi-comment', text: 'Articles', route: '/articles'},
-        {icon: 'mdi-map', text: 'Avis', route: '/avis'},
+        {icon: 'mdi-subject', text: 'Avis', route: '/avis'},
       ],
       Sign: false,
       drawer: false

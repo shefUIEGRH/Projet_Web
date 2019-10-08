@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Articles from './views/Articles'
 import Avis from './views/Avis'
+import Login from './views/Login'
 
 Vue.use(Router)
 
@@ -15,6 +16,11 @@ export default new Router({
       name: 'home',
       component: Home
     },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },,
     {
       path: '/articles',
       name: 'articles',
