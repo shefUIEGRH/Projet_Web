@@ -41,8 +41,8 @@ export default {
       msg: "Sign In",
       links: [
         {icon: 'mdi-home', text: 'Home', route: '/'},
-        {icon: 'mdi-comment', text: 'Articles', route: '/articles'},
-        {icon: 'mdi-subject', text: 'Avis', route: '/avis'},
+        {icon: 'mdi-message-text-outline', text: 'Articles', route: '/articles'},
+        {icon: 'mdi-thumb-up', text: 'Avis', route: '/avis'},
       ],
       Sign: false,
       drawer: false

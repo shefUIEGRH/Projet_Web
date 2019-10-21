@@ -1,5 +1,52 @@
 <template>
-  <div class="articles">
-    <h1>This is an articles page</h1>
+  <div class="text--primary">
+    <v-hover>
+      <template v-slot="{hover}">
+        <v-container fluid>
+          <v-row>
+            <v-col>
+              <v-card class="mx-10 my-5 pa-4" max-width="500" :elevation="hover ? 24 : 6" style="cursor: pointer">
+                <v-img src="https://image.noelshack.com/fichiers/2019/42/7/1571590402-payage.jpg" class="white--text align-end" height="450px">
+                  <v-card-title>Ecrire un article !</v-card-title>
+                </v-img>
+
+                <v-card-text class="text--primary text-center">
+                  <div>Faites-nous rêver en partageant votre expérience</div>
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-btn color="indigo" text>
+                    Conseils ?
+                  </v-btn>
+        
+                  <v-btn color="indigo" text>
+                    Modifier un article
+                  </v-btn>
+
+                  <v-btn color="indigo" text>
+                    Nouvel article !
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+
+              <v-card class="mx-10 my-5 pa-4" max-width="500" :elevation="hover ? 24 : 6" style="cursor: pointer">
+                <v-img src="https://image.noelshack.com/fichiers/2019/42/7/1571590406-paysage-bis.jpg" class="white--text align-end" height="450px">
+                  <v-card-title>Voir tous les articles !</v-card-title>
+                </v-img>
+              </v-card>
+
+              </v-col>
+          </v-row>
+        </v-container>
+      </template>
+    </v-hover>
   </div>
 </template>
+
+<script>
+  
+</script>
+
+
+
+
