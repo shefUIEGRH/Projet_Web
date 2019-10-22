@@ -11,20 +11,18 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  <v-text-field label="User" name="user" prepend-icon="dmi-account_box" type="text"></v-text-field>
+                  <v-text-field  
+                    v-model="username" label="username" name="username" prepend-icon="dmi-account_box" type="text">
+                  </v-text-field>
 
                   <v-text-field
-                    id="password"
-                    label="Password"
-                    name="password"
-                    prepend-icon="dmi-lock"
-                    type="password"
-                  ></v-text-field>
+                    v-model="password" label="Password" name="password" prepend-icon="dmi-lock" type="password">
+                  </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <div class="flex-grow-1"></div>
-                <v-btn color="primary" @click="login(user, password)">Login</v-btn>
+                <v-btn color="primary" @click="login(username, password)">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -42,15 +40,15 @@
         name: 'Login',
         data() {
             return {
-                input: {
-                    username: "",
-                    password: ""
-                }
+                username: "",
+                password: ""
             }
         },
         methods: {
-            login(user, password) {
-              axios.post("/api/login", {user, password} )    
+            login: function (username, password) {
+              console.log(username)
+              console.log(password)
+              axios.post("http://localhost:4000/api/login", {username, password} )    
                 .then((response) => {    
                     console.log("Logged in")    
                     router.push("/home")    
