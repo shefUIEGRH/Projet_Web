@@ -7,15 +7,15 @@
     <!-- Search Bar -->
     <v-layout justify-center align-center>
       <v-flex xs6>
-        <v-text-field v-model="recherche" @keyup="updateData();" label="Search" append-icon="mdi-magnify"></v-text-field>
+        <v-text-field v-model="recherche" label="Search" append-icon="mdi-magnify"></v-text-field>
       </v-flex>
 
       <!-- Filtre -->
       <v-flex xs1>
           <v-menu v-model="filtre.menu" :close-on-content-click="false" :nudge-width="200">
-            <v-btn slot="activator" icon> <v-icon>mdi-filter-outline</v-icon> </v-btn>
+            <v-btn slot="activator" @click="show = !show"  icon> <v-icon>mdi-filter-outline</v-icon> </v-btn>
 
-            <v-card class="filtre">
+            <v-card v-if="show == true" class="filtre">
               <v-card-title class="subheading">Filtres</v-card-title>
               <v-divider></v-divider>
 
@@ -68,7 +68,7 @@
     <br>
     <v-row xs-12 md-6>
       
-      <v-card class="espace mx-auto" v-for="(article, i) of articles" :key="article.title" max-width="400">
+      <v-card class="espace mx-auto justify-center" v-for="(article, i) of filteredArticle" :key="article.title" max-width="400">
         <v-img :src="article.src" height="200px"></v-img>
         <v-card-title class="justify-center">{{article.title}}</v-card-title>
               
@@ -131,8 +131,12 @@
         },
         posts: this.value,
         articles: [
-        {title: 'La France', src: 'https://image.noelshack.com/fichiers/2019/42/7/1571590402-payage.jpg', text: 'test, blablabla', visible: false},
-        {title: 'La Chine', src: 'https://image.noelshack.com/fichiers/2019/42/7/1571590406-paysage-bis.jpg', text: 'test bis, blablabla', visible: false},
+        {title: 'La France', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721350-france.jpg', text: 'test, blablabla', visible: false},
+        {title: 'La Chine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721338-chine.jpg', text: 'test bis, blablabla', visible: false},
+        {title: 'Les Etats-Unis', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721375-usa.jpg', text: 'test ter, blablabla', visible: false},
+        {title: 'L\'Egypte', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721342-egypte.jpg', text: 'test 4, blablabla', visible: false},
+        {title: 'La Nouvelle Zélande', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721943-nz.jpg', text: 'test 5, blablabla', visible: false},
+        {title: 'L\'Argentine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721333-argentine.jpg', text: 'test 6, blablabla', visible: false},
       ]
       };
     },
@@ -140,7 +144,6 @@
       test(index){
         this.articles[index].visible = !this.articles[index].visible;
       },
-
       saveFilters(sauvegarde){
         try{
           if(sauvegarde)
@@ -186,6 +189,14 @@
         this.posts = posts;
         this.updating = false;
       }
+    },
+    computed: {
+      filteredArticle: function(){
+        return this.articles.filter((article) => {
+            return article.title.toUpperCase().match(this.recherche.toUpperCase());
+        });
+      }
+
     }
   };
 </script>
