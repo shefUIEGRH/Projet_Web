@@ -9,59 +9,6 @@
       <v-flex xs6>
         <v-text-field v-model="recherche" label="Search" append-icon="mdi-magnify"></v-text-field>
       </v-flex>
-
-      <!-- Filtre -->
-      <v-flex xs1>
-          <v-menu v-model="filtre.menu" :close-on-content-click="false" :nudge-width="200">
-            <v-btn slot="activator" @click="show = !show"  icon> <v-icon>mdi-filter-outline</v-icon> </v-btn>
-
-            <v-card v-if="show == true" class="filtre">
-              <v-card-title class="subheading">Filtres</v-card-title>
-              <v-divider></v-divider>
-
-              <v-card-text>
-                <!-- Thèmes -->
-                <v-list-tile-content>
-                  <v-list-tile-title>Thèmes</v-list-tile-title>
-                  <v-list-tile-action>
-                    <v-item-group multiple v-model="filtre.content.themes">
-                      <v-item>
-                        <v-chip slot-scope="{active,toggle}" :selected="active" @click="toggle" :color="active ? 'primary' : ''" :text-color="active ? 'white' : ''">
-                          Continents
-                        </v-chip>
-                      </v-item>
-                      <v-item>
-                        <v-chip slot-scope="{active,toggle}" :selected="active" @click="toggle" :color="active ? 'primary' : ''" :text-color="active ? 'white' : ''">
-                          Pays
-                        </v-chip>
-                      </v-item>
-                      <v-item>
-                        <v-chip slot-scope="{active,toggle}" :selected="active" @click="toggle" :color="active ? 'primary' : ''" :text-color="active ? 'white' : ''">
-                          Villes
-                        </v-chip>
-                      </v-item>
-                    </v-item-group>
-                  </v-list-tile-action>
-                </v-list-tile-content>
-                <!-- Auteur -->
-                <v-list-tile-content>
-                  <v-list-tile-title>Auteur</v-list-tile-title>
-                  <v-list-tile-action>
-                    <v-text-field v-model="filtre.content.auteur" label="Nom" append-icon="mdi-magnify" type="string"></v-text-field>
-                  </v-list-tile-action>
-                </v-list-tile-content>
-    
-              </v-card-text>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-
-                <v-btn color="primary" flat @click="saveFilters(true);">Annuler</v-btn>
-                <v-btn color="primary" @click="saveFilters(false);">Enregistrer</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-menu>
-        </v-flex>
     </v-layout>
 
     <!-- Article -->
@@ -75,23 +22,42 @@
         <v-card-actions>
           <v-btn text>Modifier</v-btn>
 
-          <v-btn icon>
+          <!-- J'aime -->
+          <v-btn @click="aime(i)" icon>
             <v-icon color="red">mdi-heart</v-icon>
           </v-btn>
 
+          <div>{{articles[i].count}}</div>
+
+          <!-- Commentaires -->
           <v-btn icon>
             <v-icon color="indigo">mdi-bookmark</v-icon>
           </v-btn>
 
-          <v-btn icon>
-            <v-icon color="green">mdi-share-variant</v-icon>
-          </v-btn>
+          <!-- Share -->
+          <v-menu offset-x>
+            <template v-slot:activator="{on}">
+              <v-btn icon v-on="on">
+                <v-icon color="green">mdi-share-variant</v-icon>
+              </v-btn>
+            </template>
+
+            <v-list>
+              <v-list-item v-for="(reseau) in reseaux" :key="reseau.name"> 
+                <network network="reseau.name">
+                  <v-icon v-bind:style="{'color': reseau.color}">{{reseau.icon}}</v-icon>
+                </network>
+              </v-list-item>
+            </v-list>
+          </v-menu>
 
           <v-spacer></v-spacer>
 
           <v-btn icon @click="test(i)">
             <v-icon>{{articles[i].visible ? 'mdi-chevron-up' : 'mdi-chevron-down'}}</v-icon>
           </v-btn>
+
+
         </v-card-actions>
 
         <v-expand-transition>
@@ -101,6 +67,7 @@
           </div>
         </v-expand-transition>
       </v-card>
+      
         
     </v-row>
                         
@@ -119,75 +86,36 @@
   },
     data() {
       return {
-        show: false,
         recherche: '',
-        updating: false,
-        filtre: {
-          menu: false,
-          content: {
-            theme: [0, 1],
-            auteur: ''
-          }
-        },
-        posts: this.value,
         articles: [
-        {title: 'La France', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721350-france.jpg', text: 'test, blablabla', visible: false},
-        {title: 'La Chine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721338-chine.jpg', text: 'test bis, blablabla', visible: false},
-        {title: 'Les Etats-Unis', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721375-usa.jpg', text: 'test ter, blablabla', visible: false},
-        {title: 'L\'Egypte', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721342-egypte.jpg', text: 'test 4, blablabla', visible: false},
-        {title: 'La Nouvelle Zélande', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721943-nz.jpg', text: 'test 5, blablabla', visible: false},
-        {title: 'L\'Argentine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721333-argentine.jpg', text: 'test 6, blablabla', visible: false},
-      ]
+        {title: 'La France', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721350-france.jpg', text: 'test, blablabla', visible: false, count: 0},
+        {title: 'La Chine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721338-chine.jpg', text: 'test bis, blablabla', visible: false, count: 0},
+        {title: 'Les Etats-Unis', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721375-usa.jpg', text: 'test ter, blablabla', visible: false, count: 0},
+        {title: 'L\'Egypte', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721342-egypte.jpg', text: 'test 4, blablabla', visible: false, count: 0},
+        {title: 'La Nouvelle Zélande', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721943-nz.jpg', text: 'test 5, blablabla', visible: false, count: 0},
+        {title: 'L\'Argentine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721333-argentine.jpg', text: 'test 6, blablabla', visible: false, count: 0},
+      ],
+      reseaux: [
+        {name: "Facebook", icon: "mdi mdi-facebook", color: "navy", show: false},
+        {name: "Twitter", icon: "mdi mdi-twitter", color: "dodgerblue", show: false},
+        {name: "Google +", icon: "mdi mdi-google-plus", color: "red", show: false},
+        {name: "WhatsApp", icon: "mdi mdi-whatsapp", color: "green", show: false},
+        {name: "Linkedin", icon: "mdi mdi-linkedin", color: "royalblue", show: false},
+        {name: "Pinterest", icon: "mdi mdi-pinterest", color: "orangered", show: false}
+
+      ],
+      active: false
       };
     },
     methods: {
       test(index){
         this.articles[index].visible = !this.articles[index].visible;
       },
-      saveFilters(sauvegarde){
-        try{
-          if(sauvegarde)
-            this.filtre.content = {
-              theme: [0, 1],
-              auteur: ''
-            };
-            this.filtre.menu = false;
-            this.updateData(this.filtre.content);
-        } catch (err) {
-            console.log(`ERROR!: ${err}`)
-        }
+      share(index){
+        this.reseaux[index].show = !this.reseaux[index].show;
       },
-
-      async updateData(){
-        this.updating = true;
-        var posts = this.posts;
-
-        if(this.filtre.content){
-          posts = posts.filter(({th, /*aut*/}) => {
-            try {
-              var condition = [];
-              condition.push(this.filtre.content.theme.includes(th));
-              
-             /* if(this.filtre.content.auteur !== '')
-                condition.push(auteur.numero)...
-                );*/
-                return condition.every(Boolean);
-            } catch (err) {
-                console.log(`ERROR!: ${err}`)
-            }
-          });
-        }
-
-        if(this.recherche !== ''){
-          const mot = this.recherche.toLowerCase();
-
-          var p = posts.filtre(({ code, material}) => 
-            code.toLowerCase().includes(mot) || material.toLowerCase().includes(mot)
-          );
-          posts = p;
-        }
-        this.posts = posts;
-        this.updating = false;
+      aime(index){
+        this.articles[index].count++;
       }
     },
     computed: {
@@ -201,7 +129,7 @@
   };
 </script>
 
-<style scoped>
+<style>
 
   h1{
     text-align: center;
@@ -209,5 +137,11 @@
 
   .espace{
       margin: 10px;
+  }
+
+  ol{
+    list-style: none;
+    margin-left: -10px;
+    padding-left: -10px;
   }
 </style>
