@@ -64,6 +64,11 @@
           <div v-show="articles[i].visible">
             <v-divider></v-divider>
             <v-card-text>{{article.text}}</v-card-text>
+          
+          <v-divider></v-divider>
+          <v-footer>
+            {{article.auteur}}
+          </v-footer>
           </div>
         </v-expand-transition>
       </v-card>
@@ -88,12 +93,12 @@
       return {
         recherche: '',
         articles: [
-        {title: 'La France', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721350-france.jpg', text: 'test, blablabla', visible: false, count: 0},
-        {title: 'La Chine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721338-chine.jpg', text: 'test bis, blablabla', visible: false, count: 0},
-        {title: 'Les Etats-Unis', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721375-usa.jpg', text: 'test ter, blablabla', visible: false, count: 0},
-        {title: 'L\'Egypte', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721342-egypte.jpg', text: 'test 4, blablabla', visible: false, count: 0},
-        {title: 'La Nouvelle Zélande', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721943-nz.jpg', text: 'test 5, blablabla', visible: false, count: 0},
-        {title: 'L\'Argentine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721333-argentine.jpg', text: 'test 6, blablabla', visible: false, count: 0},
+        {title: 'La France', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721350-france.jpg', text: 'test,blablabla', auteur: "Alain Dupont 12/09/2019", visible: false, count: 0},
+        {title: 'La Chine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721338-chine.jpg', text: 'test bis, blablabla', auteur: "Mathilde Charpentier 15/10/2019", visible: false, count: 0},
+        {title: 'Les Etats-Unis', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721375-usa.jpg', text: 'test ter, blablabla', auteur: "Paul Moreau 24/11/2019", visible: false, count: 0},
+        {title: 'L\'Egypte', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721342-egypte.jpg', text: 'test 4, blablabla', auteur: "Lucile Granger 06/08/2019", visible: false, count: 0},
+        {title: 'La Nouvelle Zélande', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721943-nz.jpg', text: 'test 5, blablabla', auteur: "Ophélie Tinola 31/07/2019 ", visible: false, count: 0},
+        {title: 'L\'Argentine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721333-argentine.jpg', text: 'test 6, blablabla', auteur: "Xavier Pinon  02/11/2019", visible: false, count: 0},
       ],
       reseaux: [
         {name: "Facebook", icon: "mdi mdi-facebook", color: "navy", show: false},
