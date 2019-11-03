@@ -17,10 +17,10 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Voyage Application</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text @click="Sign ? In() : Out()" router to="/login">
-        <span>{{msg}}</span>
-        <v-icon right>mdi-exit-to-app</v-icon>
-      </v-btn>
+      <!-- TODO replace Sign by connected -->
+      <v-btn text v-if="Sign" @click="Sign =!Sign" to="/login"> <span>Sign in</span> <v-icon right>mdi-exit-to-app</v-icon> </v-btn>
+      <v-btn text v-if="!Sign" @click="Sign =!Sign" to="/login"> <span>Sign out</span> <v-icon right>mdi-exit-to-app</v-icon> </v-btn>
+
     </v-app-bar>
 
     <v-content>
@@ -44,20 +44,11 @@ export default {
         {icon: 'mdi-message-text-outline', text: 'Articles', route: '/articles'},
         {icon: 'mdi-thumb-up', text: 'Avis', route: '/avis'},
       ],
+      // TODO replace Sign by connected
       Sign: false,
       drawer: false
     }
   },
-  methods: {
-    In() {
-      this.msg = 'Sign In';
-      this.Sign = !this.Sign;
-    },
-    Out() {
-      this.msg = 'Sign Out';
-      this.Sign = !this.Sign;
-    },
-  }
 }
 </script>
 

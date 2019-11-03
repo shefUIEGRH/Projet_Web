@@ -65,7 +65,7 @@ app.post('/api/login', (req, res) => {
     })
     } else {
       // connect the user
-      req.session.userId = 1000 // connect the user, and change the id
+      req.session.userId = user.id // connect the user, and change the id
       res.json({
         message: 'connected'
       })
