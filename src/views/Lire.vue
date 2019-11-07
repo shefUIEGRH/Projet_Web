@@ -64,6 +64,11 @@
           <div v-show="articles[i].visible">
             <v-divider></v-divider>
             <v-card-text>{{article.text}}</v-card-text>
+          
+          <v-divider></v-divider>
+          <v-footer>
+            {{article.auteur}}
+          </v-footer>
           </div>
         </v-expand-transition>
       </v-card>
