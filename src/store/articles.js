@@ -1,0 +1,44 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+const state = {
+  articles: [
+    {title: 'La France', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721350-france.jpg', text: 'test, blablabla', visible: false, count: 0},
+    {title: 'La Chine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721338-chine.jpg', text: 'test bis, blablabla', visible: false, count: 0},
+    {title: 'Les Etats-Unis', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721375-usa.jpg', text: 'test ter, blablabla', visible: false, count: 0},
+    {title: 'L\'Egypte', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721342-egypte.jpg', text: 'test 4, blablabla', visible: false, count: 0},
+    {title: 'La Nouvelle Zélande', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721943-nz.jpg', text: 'test 5, blablabla', visible: false, count: 0},
+    {title: 'L\'Argentine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721333-argentine.jpg', text: 'test 6, blablabla', visible: false, count: 0},
+  ]
+}
+
+const mutation = {
+  add_articles: (state, payload) =>{
+
+    state.articles.push({
+      title: payload.title,
+      src: payload.src,
+      text: payload.text,
+      visible: false,
+      count: 0,
+    })
+  }
+}
+
+const getters = {
+    articles: state => state.articles,
+}
+
+export default new Vuex.Store({
+    state: state,
+    
+    mutations: mutation,
+    
+    getters: getters,
+    
+    action: { },
+
+    strict: false
+})

@@ -29,45 +29,22 @@ const users = [
   {  id: 3, username: 'user', password: 'user'},
 ]
 
-// const reditectLogin = (req, res, next) => {
-//   if (!req.session.userId){
-//     res.redirect('/login')
-//   }
-//   else {
-//     next()
-//   }
-// }
-
-// app.get('/api/test', (req, res) => {
-//   console.log('ce console.log est appelé au bon moment')
-//   res.json([
-//     {
-//       title: 'truc',
-//       content: 'machin'
-//     }, {
-//       title: 'truc2',
-//       content: 'machin2'
-//     }
-//   ])
-// })
-
-
 app.post('/api/login', (req, res) => {
   console.log('req.body', req.body)
   console.log('req.query', req.query)
   if (!req.session.userId) {
-    const user = users.find(u => u.username === req.body.username && u.password === req.body.password)
+    const user = users.find(u => u.username === req.body.user && u.password === req.body.password)
     if (!user) {
-      // gérez le cas où on n'a pas trouvé d'utilisateur correspondant
       res.status(401)
       res.json({
-      message: 'Bad user'
+      message: 'user/password doesnt match'
     })
     } else {
-      // connect the user
-      req.session.userId = user.id // connect the user, and change the id
+      req.session.userId = user.id 
       res.json({
-        message: 'connected'
+        message: 'connected',
+        username: user.username,
+        token: true
       })
     }
   } else {
