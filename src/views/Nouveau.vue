@@ -52,7 +52,7 @@
   import { validationMixin } from 'vuelidate'
   import { required, maxLength } from 'vuelidate/lib/validators'
   import router from "../router";
-  import store from '../store/articles'
+  import store from '../store/store'
   
 
   // import ArticlesVue from './Articles.vue'

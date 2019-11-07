@@ -76,7 +76,7 @@
 
 <script>
   import Vuex from 'vuex'
-
+  // import store from '../store/account'
   export default {
     props: {
     value: {
@@ -114,14 +114,14 @@
       },
       
     },
-    computed: {
+    computed: { 
       ...Vuex.mapGetters(['articles']),
       filteredArticle: function(){
-        return this.articles.filter((article) => {
+       return this.articles.filter((article) => {
             return article.title.toUpperCase().match(this.recherche.toUpperCase());
             // return article.title.match(this.recherche);
         });
-      }
+      } 
 
     }
   };
