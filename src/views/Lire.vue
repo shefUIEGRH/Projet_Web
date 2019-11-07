@@ -75,6 +75,8 @@
 </template>
 
 <script>
+  import Vuex from 'vuex'
+
   export default {
     props: {
     value: {
@@ -87,26 +89,19 @@
     data() {
       return {
         recherche: '',
-        articles: [
-        {title: 'La France', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721350-france.jpg', text: 'test, blablabla', visible: false, count: 0},
-        {title: 'La Chine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721338-chine.jpg', text: 'test bis, blablabla', visible: false, count: 0},
-        {title: 'Les Etats-Unis', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721375-usa.jpg', text: 'test ter, blablabla', visible: false, count: 0},
-        {title: 'L\'Egypte', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721342-egypte.jpg', text: 'test 4, blablabla', visible: false, count: 0},
-        {title: 'La Nouvelle Zélande', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721943-nz.jpg', text: 'test 5, blablabla', visible: false, count: 0},
-        {title: 'L\'Argentine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721333-argentine.jpg', text: 'test 6, blablabla', visible: false, count: 0},
-      ],
-      reseaux: [
-        {name: "Facebook", icon: "mdi mdi-facebook", color: "navy", show: false},
-        {name: "Twitter", icon: "mdi mdi-twitter", color: "dodgerblue", show: false},
-        {name: "Google +", icon: "mdi mdi-google-plus", color: "red", show: false},
-        {name: "WhatsApp", icon: "mdi mdi-whatsapp", color: "green", show: false},
-        {name: "Linkedin", icon: "mdi mdi-linkedin", color: "royalblue", show: false},
-        {name: "Pinterest", icon: "mdi mdi-pinterest", color: "orangered", show: false}
+        reseaux: [
+          {name: "Facebook", icon: "mdi mdi-facebook", color: "navy", show: false},
+          {name: "Twitter", icon: "mdi mdi-twitter", color: "dodgerblue", show: false},
+          {name: "Google +", icon: "mdi mdi-google-plus", color: "red", show: false},
+          {name: "WhatsApp", icon: "mdi mdi-whatsapp", color: "green", show: false},
+          {name: "Linkedin", icon: "mdi mdi-linkedin", color: "royalblue", show: false},
+          {name: "Pinterest", icon: "mdi mdi-pinterest", color: "orangered", show: false}
 
       ],
       active: false
-      };
+      }
     },
+
     methods: {
       test(index){
         this.articles[index].visible = !this.articles[index].visible;
@@ -116,12 +111,15 @@
       },
       aime(index){
         this.articles[index].count++;
-      }
+      },
+      
     },
     computed: {
+      ...Vuex.mapGetters(['articles']),
       filteredArticle: function(){
         return this.articles.filter((article) => {
             return article.title.toUpperCase().match(this.recherche.toUpperCase());
+            // return article.title.match(this.recherche);
         });
       }
 

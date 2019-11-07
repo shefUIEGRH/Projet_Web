@@ -8,12 +8,13 @@
 
 <script>
 import Navbar from './components/Navbar'
+// import Nouveau from './views/Nouveau'
+// import Lire from './views/Lire'
 export default {
   components: { Navbar },
   name: 'App',
   data () {
     return {
-      
     }
   }
 }

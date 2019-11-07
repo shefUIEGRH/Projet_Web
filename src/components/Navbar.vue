@@ -17,9 +17,8 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Voyage Application</v-toolbar-title>
       <v-spacer></v-spacer>
-      <!-- TODO replace Sign by connected -->
-      <v-btn text v-if="Sign" @click="Sign =!Sign" to="/login"> <span>Sign in</span> <v-icon right>mdi-exit-to-app</v-icon> </v-btn>
-      <v-btn text v-if="!Sign" @click="Sign =!Sign" to="/login"> <span>Sign out</span> <v-icon right>mdi-exit-to-app</v-icon> </v-btn>
+      <v-btn text v-if="!connected" to="/login"> <span>Sign in</span> <v-icon right>mdi-exit-to-app</v-icon> </v-btn>
+      <v-btn text v-if="connected" to="/login"> <span>Sign out</span> <v-icon right>mdi-exit-to-app</v-icon> </v-btn>
 
     </v-app-bar>
 
@@ -35,9 +34,13 @@
 </template>
 
 <script>
+import Vuex from 'vuex'
+
 export default {
+  
   data() {
     return {
+      connected: false, //Vuex.mapGetters(['connected']),
       msg: "Sign In",
       links: [
         {icon: 'mdi-home', text: 'Home', route: '/'},
@@ -45,10 +48,10 @@ export default {
         {icon: 'mdi-thumb-up', text: 'Avis', route: '/avis'},
       ],
       // TODO replace Sign by connected
-      Sign: false,
       drawer: false
     }
   },
+
 }
 </script>
 

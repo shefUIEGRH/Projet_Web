@@ -61,7 +61,7 @@ app.post('/api/login', (req, res) => {
       // gérez le cas où on n'a pas trouvé d'utilisateur correspondant
       res.status(401)
       res.json({
-      message: 'Bad user'
+      message: 'user/password doesnt match'
     })
     } else {
       // connect the user

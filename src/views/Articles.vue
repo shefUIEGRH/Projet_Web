@@ -37,10 +37,8 @@
                     </v-card-text>
                     <br/>
                     <v-card-actions class="justify-center" >
-                      <v-btn block color="indigo" text x-large>
-                        <router-link to="/read" id="btn">
+                      <v-btn block color="indigo" text x-large to="/read">
                         Let's GO 
-                        </router-link>
                       </v-btn>
                     </v-card-actions>
                   </v-card>
