@@ -19,7 +19,7 @@
       <v-spacer></v-spacer>
       <!-- TODO Reactivity pb ... cant use v-if and v-else for btn ... -->
       <!-- <div v-if="isLoggedIn === false">  -->
-        <v-btn text to="/home" @click="logout"> <span>Sign out</span> <v-icon right> mdi-exit-to-app </v-icon>  </v-btn>
+        <v-btn text to="/" @click="logout"> <span>Sign out</span> <v-icon right> mdi-exit-to-app </v-icon>  </v-btn>
       <!-- </div> --> 
       <!-- <div v-else > -->
         <v-btn text to="/login">  <span>Sign in</span>  <v-icon right>mdi-exit-to-app</v-icon> </v-btn>

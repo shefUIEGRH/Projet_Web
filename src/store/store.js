@@ -10,13 +10,14 @@ export default new Vuex.Store({
     token: localStorage.getItem('token') || '',
     user : {},
     articles: [
-      {title: 'La France', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721350-france.jpg', text: 'test, blablabla', visible: false, count: 0},
-      {title: 'La Chine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721338-chine.jpg', text: 'test bis, blablabla', visible: false, count: 0},
-      {title: 'Les Etats-Unis', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721375-usa.jpg', text: 'test ter, blablabla', visible: false, count: 0},
-      {title: 'L\'Egypte', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721342-egypte.jpg', text: 'test 4, blablabla', visible: false, count: 0},
-      {title: 'La Nouvelle Zélande', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721943-nz.jpg', text: 'test 5, blablabla', visible: false, count: 0},
-      {title: 'L\'Argentine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721333-argentine.jpg', text: 'test 6, blablabla', visible: false, count: 0},
-    ]
+      {title: 'La France', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721350-france.jpg', text: 'test, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 3},{name: 'admin', avis: "", note: 3}]},
+      {title: 'La Chine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721338-chine.jpg', text: 'test bis, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 3},{name: 'admin', avis: "", note: 3}]},
+      {title: 'Les Etats-Unis', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721375-usa.jpg', text: 'test ter, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 3},{name: 'admin', avis: "", note: 3}]},
+      {title: 'L\'Egypte', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721342-egypte.jpg', text: 'test 4, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 3},{name: 'admin', avis: "", note: 3}]},
+      {title: 'La Nouvelle Zélande', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721943-nz.jpg', text: 'test 5, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 3},{name: 'admin', avis: "", note: 3}]},
+      {title: 'L\'Argentine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721333-argentine.jpg', text: 'test 6, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 3},{name: 'admin', avis: "", note: 3}]},
+    ],
+    
   },
   mutations: {
     auth_request(state){
@@ -34,8 +35,14 @@ export default new Vuex.Store({
       state.status = ''
       state.token = ''
     },
+    add_avis: (state, payload) =>{
+      state.avis.push({
+        name: payload.name,
+        avis: payload.avis,
+      
+      })
+    },
     add_articles: (state, payload) =>{
-
       state.articles.push({
         title: payload.title,
         src: payload.src,
@@ -44,11 +51,15 @@ export default new Vuex.Store({
         count: 0,
       })
     },
+    suppr_articles: (state, index) =>{
+      state.articles.splice(index, 1)
+    },
   },
   getters : {
     isLoggedIn: state => state.token,
     authStatus: state => state.status,
     articles: state => state.articles,
+    avis: state => state.avis,
   },
 
   actions: {

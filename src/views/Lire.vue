@@ -20,7 +20,7 @@
         <v-card-title class="justify-center">{{article.title}}</v-card-title>
               
         <v-card-actions>
-          <v-btn text>Modifier</v-btn>
+          <v-btn text @click="suppr_article(i)">Supprimer</v-btn>
 
           <!-- J'aime -->
           <v-btn @click="aime(i)" icon>
@@ -30,7 +30,7 @@
           <div>{{articles[i].count}}</div>
 
           <!-- Commentaires -->
-          <v-btn icon>
+          <v-btn icon to="/avis">
             <v-icon color="indigo">mdi-bookmark</v-icon>
           </v-btn>
 
@@ -67,7 +67,7 @@
           
           <v-divider></v-divider>
           <v-footer>
-            {{article.auteur}}
+            {{article.author}}
           </v-footer>
           </div>
         </v-expand-transition>
@@ -81,6 +81,7 @@
 
 <script>
   import Vuex from 'vuex'
+import store from '../store/store';
   // import store from '../store/account'
   export default {
     props: {
@@ -101,7 +102,6 @@
           {name: "WhatsApp", icon: "mdi mdi-whatsapp", color: "green", show: false},
           {name: "Linkedin", icon: "mdi mdi-linkedin", color: "royalblue", show: false},
           {name: "Pinterest", icon: "mdi mdi-pinterest", color: "orangered", show: false}
-
       ],
       active: false
       }
@@ -117,6 +117,10 @@
       aime(index){
         this.articles[index].count++;
       },
+      suppr_article: function(index) {
+        store.commit('suppr_articles', index)
+      }
+
       
     },
     computed: { 
@@ -126,8 +130,7 @@
             return article.title.toUpperCase().match(this.recherche.toUpperCase());
             // return article.title.match(this.recherche);
         });
-      } 
-
+      },
     }
   };
 </script>
