@@ -1,5 +1,5 @@
 <template>
-  <v-container fuild>
+  <v-container fluid>
     <div v-for="(article, i) of articles" :key="i">
       <v-row class="mb-1" no-gutters>
         <v-col cols="3">
@@ -34,10 +34,9 @@
           </v-card>
         </v-col>
         <v-col cols="9">
-          <v-carousel cycle height="auto" hide-delimiter-background show-arrows-on-hover>
-            <v-carousel-item v-for="(comment, i) in articles" :key="i">
-              <!-- {{comment[i].name}} -->
-              test
+          <v-carousel cycle height="327" hide-delimiter-background show-arrows-on-hover>
+            <v-carousel-item class="espace" v-for="(comment, index) in article.comments" :key="index" src="https://image.freepik.com/free-vector/geometric-grey-background_1055-3147.jpg">
+              {{comment.name}} : {{comment.avis}} <v-rating v-model="comment.note" ></v-rating>
             </v-carousel-item>
           </v-carousel>
         </v-col>

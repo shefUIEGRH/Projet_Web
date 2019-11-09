@@ -10,10 +10,10 @@ export default new Vuex.Store({
     token: localStorage.getItem('token') || '',
     user : {},
     articles: [
-      {title: 'La France', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721350-france.jpg', text: 'test, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 3},{name: 'admin', avis: "", note: 3}]},
-      {title: 'La Chine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721338-chine.jpg', text: 'test bis, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 3},{name: 'admin', avis: "", note: 3}]},
+      {title: 'La France', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721350-france.jpg', text: '', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "trop cool la france , Woaw", note: 5},{name: 'admin', avis: "", note: 2}]},
+      {title: 'La Chine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721338-chine.jpg', text: 'test bis, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 2},{name: 'admin', avis: "", note: 3}]},
       {title: 'Les Etats-Unis', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721375-usa.jpg', text: 'test ter, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 3},{name: 'admin', avis: "", note: 3}]},
-      {title: 'L\'Egypte', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721342-egypte.jpg', text: 'test 4, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 3},{name: 'admin', avis: "", note: 3}]},
+      {title: 'L\'Egypte', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721342-egypte.jpg', text: 'test 4, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 5},{name: 'admin', avis: "", note: 4}]},
       {title: 'La Nouvelle Zélande', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721943-nz.jpg', text: 'test 5, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 3},{name: 'admin', avis: "", note: 3}]},
       {title: 'L\'Argentine', src: 'https://image.noelshack.com/fichiers/2019/44/6/1572721333-argentine.jpg', text: 'test 6, blablabla', author: "admin", visible: false, count: 0, comments: [{name: 'admin', avis: "", note: 3},{name: 'admin', avis: "", note: 3}]},
     ],
@@ -59,7 +59,6 @@ export default new Vuex.Store({
     isLoggedIn: state => state.token,
     authStatus: state => state.status,
     articles: state => state.articles,
-    avis: state => state.avis,
   },
 
   actions: {
