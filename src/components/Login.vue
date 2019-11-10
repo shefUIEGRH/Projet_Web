@@ -15,8 +15,7 @@
                   v-model="user"
                   label="Login"
                   required
-                  @input="$v.name.$touch()"
-                  @blur="$v.name.$touch()"
+                  
                 ></v-text-field>
                 <v-text-field
                   outlined
@@ -24,8 +23,7 @@
                   type="password"
                   label="Password"
                   required
-                  @input="$v.password.$touch()"
-                  @blur="$v.password.$touch()"
+          
                 ></v-text-field>
               </v-form>
             </v-card-text>
