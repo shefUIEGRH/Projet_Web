@@ -5,7 +5,6 @@ import Articles from './views/Articles'
 import Avis from './views/Avis'
 import Login from './components/Login'
 import Conseils from './views/Conseils'
-import Modifier from './views/Modifier'
 import Nouveau from './views/Nouveau'
 import Lire from './views/Lire'
 import store from './store/store'
@@ -42,14 +41,6 @@ let router = new Router({
       path: '/conseils',
       name: 'conseils',
       component: Conseils,
-      meta: {
-        requiresAuth: true
-      },
-    },
-    {
-      path: '/modifier',
-      name: 'modifier',
-      component: Modifier,
       meta: {
         requiresAuth: true
       },
