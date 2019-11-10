@@ -8,7 +8,6 @@
             <v-card-title class="justify-center">{{article.title}}</v-card-title>
 
             <v-card-actions>
-              <!-- J'aime -->
               <v-btn @click="aime(i)" icon>
                 <v-icon color="red">mdi-heart</v-icon>
               </v-btn>
@@ -35,8 +34,15 @@
         </v-col>
         <v-col cols="9">
           <v-carousel cycle height="327" hide-delimiter-background show-arrows-on-hover>
-            <v-carousel-item class="espace" v-for="(comment, index) in article.comments" :key="index" src="https://image.freepik.com/free-vector/geometric-grey-background_1055-3147.jpg">
-              {{comment.name}} : {{comment.avis}} <v-rating v-model="comment.note" ></v-rating>
+            <v-carousel-item
+              class="espace"
+              v-for="(comment, index) in article.comments"
+              :key="index"
+              src="https://image.freepik.com/free-vector/geometric-grey-background_1055-3147.jpg"
+            >
+              <v-rating v-model="comment.note"></v-rating>
+              <h4>{{comment.name}} :</h4>
+              <p>{{comment.avis}}</p>
             </v-carousel-item>
           </v-carousel>
         </v-col>
@@ -60,7 +66,16 @@ export default {
     }
   },
   computed: {
-    ...Vuex.mapGetters(["articles"]),
+    ...Vuex.mapGetters(["articles"])
   }
 };
 </script>
+<style>
+p {
+  text-align: center;
+  font-size: 30px;
+}
+h4 {
+  margin-left: 11px;
+}
+</style>
