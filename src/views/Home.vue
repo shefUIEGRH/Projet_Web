@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-carousel cycle height="810" hide-delimiter-background show-arrows-on-hover>
       <v-carousel-item v-for="(image,i) in images" :key="i" :src="image.src">
-        <v-row align="top" justify="center"> 
+        <v-row justify="center"> 
             <div class="display-3 couleur">{{image.title}}</div>
           </v-row>
       </v-carousel-item>
